@@ -17,13 +17,17 @@ public class EmplyesServices {
 
 
     //Create
-    public void save(Employes employe) {
-        employesRepository.save(employe);
+    public Boolean save(Employes employe) {
+        Optional<Employes> optionalEmploye  = Optional.of(employesRepository.save(employe));
+        if (optionalEmploye.isPresent()) {
+            return true;
+        }
+        return false;
     }
 
 
     //Read
-    public List<Employes> getAllStudents() {
+    public List<Employes> getAllEmployes() {
         return employesRepository.findAll();
     }
 
@@ -34,7 +38,6 @@ public class EmplyesServices {
         if (optionalEmployes.isPresent()) {
             Employes existingEmploye= optionalEmployes.get();
 
-            // Only update non-null fields from updatedStudent
             if (updatedEmploye.getFirstName() != null) {
                 existingEmploye.setFirstName(updatedEmploye.getFirstName());
             }

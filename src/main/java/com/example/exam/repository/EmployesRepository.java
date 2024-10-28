@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployesRepository extends JpaRepository<Employes, Integer> {
 
-
+    boolean existsByEmail(String email);
 }
