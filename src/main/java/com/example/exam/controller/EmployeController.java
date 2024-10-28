@@ -45,22 +45,38 @@ public class EmployeController {
     }
 
 
-    @PutMapping("/update/{id}/")
-    public String updateStudent(@PathVariable Long id, @RequestBody Employes updatedEmploye) {
+    @PutMapping("/update/{id}/{lng}")
+    public String updateStudent(@PathVariable Long id, @RequestBody Employes updatedEmploye , @PathVariable String lng) {
         Employes employes = emplyesServices.updateEmploye(id, updatedEmploye);
         if (employes != null) {
-            return "Employee updated successfully";
+            if (lng.equals("EN")){
+                return "Employee updated successfully";
+            } else {
+                return "utilisateur bien modifier";
+            }
         } else {
-            return "Employee not found";
+            if (lng.equals("EN")){
+                return "Employee not found";}
+            else {
+                return "utilisateur introuvable";
+            }
         }
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteEmploye(@PathVariable Long id) {
+    @DeleteMapping("/{id}/{lng}")
+    public String deleteEmploye(@PathVariable Long id , @PathVariable String lng) {
         if (emplyesServices.deleteEmploye(id)){
-            return "Employee deleted successfully";
+            if (lng.equals("EN")) {
+                return "Employee deleted successfully";
+            } else {
+                return "utilisateur bien supprimer";
+            }
         } else {
-            return "Employee not found";
+            if (lng.equals("EN")){
+                return "Employee not found";}
+            else {
+                return "utilisateur introuvable";
+            }
         }
     }
 
